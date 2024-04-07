@@ -3,100 +3,12 @@
 #include <string>
 #include <thread> // для имитации загрузки
 #include <Windows.h>
+#include "func.h"
+#include <sstream>
 
 
 using namespace std;
 
-
-
-
-
-void showLoadingScreen(sf::RenderWindow& window, std::vector<sf::Texture>& frames)
-{
-    sf::Font font;
-    font.loadFromFile("arial.ttf");
-
-    sf::Text text;
-    text.setFont(font);
-    
-    text.setCharacterSize(24);
-    text.setFillColor(sf::Color::White);
-    text.setPosition(100, 100);
-
-    int currentFrame = 1; // Начинаем с первого кадра, так как 0-й кадр - заглушка
-
-    // Отображение всех кадров анимации
-    while (currentFrame < frames.size())
-    {
-        sf::Event event;
-        while (window.pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed)
-                window.close();
-        }
-
-        window.clear(sf::Color::Black);
-        window.draw(text);
-
-        // Отобразите текущий кадр анимации с установкой новой позиции
-        sf::Sprite sprite(frames[currentFrame]);
-        sprite.setPosition(600 , 300);
-        window.draw(sprite);
-
-        window.display();
-
-        // Переключение кадров анимации
-        ++currentFrame;
-
-        // Задержка между кадрами
-        std::this_thread::sleep_for(std::chrono::milliseconds(10)); // Можно изменить время задержки
-        
-    }
-}
-
-
-void simulateLoading()
-{
-    // Имитация загрузки
-    for (int i = 0; i < 100; ++i)
-    {
-        // Сюда можно добавить любую логику загрузки игры
-        std::this_thread::sleep_for(std::chrono::milliseconds(2)); // Имитация загрузки
-    }
-}
-
-
-
-
-
-
-void drawBoard(sf::RenderWindow& window, sf::Sprite& sprite, sf::Texture& texture)
-{
-    sf::Event event;
-    while (window.pollEvent(event))
-    {
-        if (event.type == sf::Event::Closed)
-            window.close();
-    }
-
-    sprite.setTexture(texture);
-
-    // Определяем коэффициенты масштабирования по осям X и Y
-    float xScale = (float)window.getSize().x / texture.getSize().x;
-    float yScale = (float)window.getSize().y / texture.getSize().y;
-
-    // Выбираем минимальный коэффициент масштабирования, чтобы изображение вместилось полностью
-    float scale = std::min(xScale, yScale);
-
-    // Устанавливаем масштаб с сохранением пропорций
-    sprite.setScale(scale, scale);
-
-    // Позиционируем спрайт так, чтобы его верхний левый угол был в точке (0, 0) окна
-    sprite.setPosition(0, 0);
-
-    window.clear(sf::Color::Black);
-    window.draw(sprite);
-}
 
 
 int main()
@@ -112,9 +24,26 @@ int main()
     for(int i = 0; i < 164; ++i)
     {
         frames.push_back(sf::Texture());
-        frames[i].loadFromFile("load-" + to_string(i) + ".png");
+        frames[i].loadFromFile("load/load-" + to_string(i) + ".png");
 
         
+    }
+    std::vector<sf::Texture> clips;
+    clips.push_back(sf::Texture());
+    for (int i = 0; i < 8; ++i)
+    {
+        if(i < 10)
+        {
+            clips.push_back(sf::Texture());
+            clips[i].loadFromFile("perehod/perehod_00" + to_string(i) + ".png");
+        }
+        else
+        {
+            clips.push_back(sf::Texture());
+            clips[i].loadFromFile("perehod/perehod_0" + to_string(i) + ".png");
+        }
+
+
     }
 
 
@@ -122,20 +51,103 @@ int main()
     showLoadingScreen(window, frames);
     simulateLoading(); // Имитация загрузки
 
-    
 
-
-    sf::Texture texture;
-    if (!texture.loadFromFile("fon1.png"))
+    sf::Texture texturePlace1;
+    if (!texturePlace1.loadFromFile("place1.jpeg"))
     {
         throw std::runtime_error("IMG is not open");
     }
 
-    sf::Sprite sprite(texture);
+    sf::Texture texturePlace2;
+    if (!texturePlace2.loadFromFile("place2.jpeg"))
+    {
+        throw std::runtime_error("IMG is not open");
+    }
+
+    sf::Texture texturePlace3;
+    if (!texturePlace3.loadFromFile("place3.jpeg"))
+    {
+        throw std::runtime_error("IMG is not open");
+    }
+    
+
+
+    sf::Texture texturePlace4;
+    if (!texturePlace4.loadFromFile("place4.png"))
+    {
+        throw std::runtime_error("IMG is not open");
+    }
+
+
+    sf::Texture textureMenu;
+    if (!textureMenu.loadFromFile("Menu.jpeg"))
+    {
+        throw std::runtime_error("Menu image is not open");
+    }
+
+
+    sf::Texture texturePlay;
+    if (!texturePlay.loadFromFile("start.png"))
+    {
+        throw std::runtime_error("PLAY image is not open");
+    }
+
+    sf::Texture textureChoice;
+    if (!textureChoice.loadFromFile("background_selection.jpeg"))
+    {
+        throw std::runtime_error("Choice image is not open");
+    }
+
+
+
+
+    sf::Sprite spritePlace1(texturePlace1);
+    sf::Sprite spritePlace2(texturePlace2);
+    sf::Sprite spritePlace3(texturePlace3);
+    sf::Sprite spritePlace4(texturePlace4);
+
+
+    sf::Sprite spriteMenu(textureMenu);
+    sf::Sprite spritePlay(texturePlay);
+    sf::Sprite spriteChoice(textureChoice);
+
+    bool map1 = false, map2 = false, map3 = false, map4 = false;
+
 
     while (window.isOpen())
     {
-        drawBoard(window, sprite, texture);
+        menuWithPlay(window, spriteMenu, textureMenu, spritePlay, texturePlay);
+
+        if(isMainMenuVisible)
+        {
+            animationAfterPlay(window, clips);
+            backgroundSelection(window, spriteChoice, textureChoice,
+                map1, map2, map3, map4);
+            if (map1)
+            {
+                sf::sleep(sf::milliseconds(300));
+                playInMap4(window, spritePlace1, texturePlace1);
+            }
+            if (map2)
+            {
+                sf::sleep(sf::milliseconds(300));
+                playInMap4(window, spritePlace2, texturePlace2);
+            }
+            if (map3)
+            {
+                sf::sleep(sf::milliseconds(300));
+                playInMap4(window, spritePlace3, texturePlace3);
+            }
+
+            if (map4)
+            {
+                sf::sleep(sf::milliseconds(300));
+                playInMap4(window, spritePlace4, texturePlace4);
+            }
+
+            
+
+        }
 
         if (GetAsyncKeyState(VK_F11))
         {
