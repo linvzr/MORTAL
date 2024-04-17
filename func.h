@@ -5,6 +5,8 @@ int currentFrame1 = 1; // Начинаем с первого кадра, так 
 
 
 
+
+
 void showLoadingScreen(sf::RenderWindow& window, std::vector<sf::Texture>& frames)
 {
     sf::Font font;
@@ -258,7 +260,7 @@ void animationAfterPlay(sf::RenderWindow& window, std::vector<sf::Texture>& clip
     float scaleFactor = 0.935f; // Коэффициент масштабирования
 
     // Отображение всех кадров анимации
-    while (currentFrame1 < clips.size())
+    while (currentFrame1 < clips.size()-1)
     {
         sf::Event event;
         while (window.pollEvent(event))
@@ -284,13 +286,14 @@ void animationAfterPlay(sf::RenderWindow& window, std::vector<sf::Texture>& clip
         ++currentFrame1;
 
         // Задержка между кадрами
-        std::this_thread::sleep_for(std::chrono::milliseconds(48)); // Можно изменить время задержки
+        std::this_thread::sleep_for(std::chrono::milliseconds(45)); // Можно изменить время задержки
     }
     
 
 }
 
-void backgroundSelection(sf::RenderWindow& window, sf::Sprite& spriteChoice, sf::Texture& textureChoice, bool& map1, bool& map2, bool& map3, bool& map4)
+void backgroundSelection(sf::RenderWindow& window, sf::Sprite& spriteChoice, sf::Texture& textureChoice, bool& map1, bool& map2, bool& map3, bool& map4,
+    bool& MouseClick)
 {
     
 
@@ -421,7 +424,7 @@ void backgroundSelection(sf::RenderWindow& window, sf::Sprite& spriteChoice, sf:
                 if (spritePlaceOne.getGlobalBounds().contains(mouseWorldPos))
                 {
                    
-                    
+                    MouseClick = true;
                     map1 = true;
                 }
             }
@@ -439,7 +442,7 @@ void backgroundSelection(sf::RenderWindow& window, sf::Sprite& spriteChoice, sf:
                 if (spritePlaceTwo.getGlobalBounds().contains(mouseWorldPos))
                 {
                     
-                    
+                    MouseClick = true;
                     map2 = true;
                 }
             }
@@ -452,7 +455,7 @@ void backgroundSelection(sf::RenderWindow& window, sf::Sprite& spriteChoice, sf:
                 if (spritePlaceThree.getGlobalBounds().contains(mouseWorldPos))
                 {
                      
-                    
+                    MouseClick = true;
                     map3 = true;
                 }
             }
@@ -465,7 +468,7 @@ void backgroundSelection(sf::RenderWindow& window, sf::Sprite& spriteChoice, sf:
                 if (spritePlaceFour.getGlobalBounds().contains(mouseWorldPos))
                 {
                     
-                    
+                    MouseClick = true;
                     map4 = true;
                 }
             }
@@ -484,6 +487,429 @@ void backgroundSelection(sf::RenderWindow& window, sf::Sprite& spriteChoice, sf:
     window.draw(spritePlaceTwo);
     window.draw(spritePlaceThree);
     window.draw(spritePlaceFour);
+
+
+}
+
+
+
+int posirionPlayer1 = 0, posirionPlayer2 = 0;
+bool firstClick = false;
+bool secondClick = false;
+
+
+bool Ch1_player1 = false, Ch2_player1 = false, Ch3_player1 = false, Ch4_player1 = false;
+bool Ch1_player2 = false, Ch2_player2 = false, Ch3_player2 = false, Ch4_player2 = false;
+
+
+
+
+void ChoiceCharacter(sf::RenderWindow& window, sf::Sprite& spriteSelectCharacter, sf::Texture& textureSelectCharacter, bool& CharacterSelected)
+{
+    spriteSelectCharacter.setTexture(textureSelectCharacter);
+
+    float xScale = (float)window.getSize().x / textureSelectCharacter.getSize().x;
+    float yScale = (float)window.getSize().y / textureSelectCharacter.getSize().y;
+    float scale = std::min(xScale, yScale);
+    spriteSelectCharacter.setScale(scale, scale);
+    spriteSelectCharacter.setPosition(0, 0);
+
+
+    sf::Texture textureNext;
+    if (!textureNext.loadFromFile("next.png"))
+    {
+        throw std::runtime_error("next image is not open");
+    }
+    sf::Sprite spriteNext(textureNext);
+    spriteNext.setTexture(textureNext);
+    spriteNext.setPosition(1300, 700);
+   
+
+
+
+
+
+
+    sf::Texture textureCh1;
+    if (!textureCh1.loadFromFile("iconCh1.jpg"))
+    {
+        throw std::runtime_error("Character image is not open");
+    }
+    sf::Sprite spriteCh1(textureCh1);
+    spriteCh1.setTexture(textureCh1);
+    spriteCh1.setPosition(100, 250);
+
+
+    sf::Texture textureCh2;
+    if (!textureCh2.loadFromFile("iconCh2.jpg"))
+    {
+        throw std::runtime_error("Character image is not open");
+    }
+    sf::Sprite spriteCh2(textureCh2);
+    spriteCh2.setTexture(textureCh2);
+    spriteCh2.setPosition(500, 250);
+
+
+
+    sf::Texture textureCh3;
+    if (!textureCh3.loadFromFile("iconCh3.jpg"))
+    {
+        throw std::runtime_error("Character image is not open");
+    }
+    sf::Sprite spriteCh3(textureCh3);
+    spriteCh3.setTexture(textureCh3);
+    spriteCh3.scale(0.5, 0.5);
+    spriteCh3.setPosition(900, 250);
+
+
+    sf::Texture textureCh4;
+    if (!textureCh4.loadFromFile("iconCh4.jpg"))
+    {
+        throw std::runtime_error("Character image is not open");
+    }
+    sf::Sprite spriteCh4(textureCh4);
+    spriteCh4.setTexture(textureCh4);
+    spriteCh4.scale(0.5, 0.5);
+    spriteCh4.setPosition(1300, 250);
+
+
+    sf::Font font;
+    if (!font.loadFromFile("arial.ttf")) {
+        std::cerr << "Ошибка загрузки шрифта!" << std::endl;
+        
+    }
+    //координатф для первого ирока
+    sf::Text textForCh1_1("player 1", font, 40);
+    textForCh1_1.setPosition(175, 550);
+    textForCh1_1.setFillColor(sf::Color::Red);
+
+    sf::Text textForCh1_2("player 1", font, 40);
+    textForCh1_2.setPosition(575,550);
+    textForCh1_2.setFillColor(sf::Color::Red);
+
+    sf::Text textForCh1_3("player 1", font, 40);
+    textForCh1_3.setPosition(975, 550);
+    textForCh1_3.setFillColor(sf::Color::Red);
+
+    sf::Text textForCh1_4("player 1", font, 40);
+    textForCh1_4.setPosition(1375, 550);
+    textForCh1_4.setFillColor(sf::Color::Red);
+
+
+    //координаты для второго игрока
+    sf::Text textForCh2_1("player 2", font, 40);
+    textForCh2_1.setPosition(175, 550);
+    textForCh2_1.setFillColor(sf::Color::Blue);
+
+    sf::Text textForCh2_2("player 2", font, 40);
+    textForCh2_2.setPosition(575, 550);
+    textForCh2_2.setFillColor(sf::Color::Blue);
+
+    sf::Text textForCh2_3("player 2", font, 40);
+    textForCh2_3.setPosition(975, 550);
+    textForCh2_3.setFillColor(sf::Color::Blue);
+
+    sf::Text textForCh2_4("player 2", font, 40);
+    textForCh2_4.setPosition(1375, 550);
+    textForCh2_4.setFillColor(sf::Color::Blue);
+
+
+
+
+    sf::Event event;
+    while (window.pollEvent(event))
+    {
+        if (event.type == sf::Event::Closed)
+            window.close();
+
+        sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+        sf::Vector2f mouseWorldPos = window.mapPixelToCoords(mousePosition);
+
+
+        if (spriteCh1.getGlobalBounds().contains(mouseWorldPos))
+        {
+
+            spriteCh1.setScale(0.9f, 0.9f);
+            
+        }
+        else
+        {
+
+            spriteCh1.setScale(1.0f, 1.0f);
+
+        }
+
+        if (spriteCh2.getGlobalBounds().contains(mouseWorldPos))
+        {
+
+            spriteCh2.setScale(0.9f, 0.9f);
+        }
+        else
+        {
+
+            spriteCh2.setScale(1.0f, 1.0f);
+
+        }
+        if (spriteCh3.getGlobalBounds().contains(mouseWorldPos))
+        {
+
+            spriteCh3.setScale(0.45f, 0.45f);
+        }
+        else
+        {
+
+            spriteCh3.setScale(0.5f, 0.5f);
+
+        }
+
+        if (spriteCh4.getGlobalBounds().contains(mouseWorldPos))
+        {
+            
+            spriteCh4.setScale(0.45f, 0.45f);
+        }
+        else
+        {
+
+            spriteCh4.setScale(0.5f, 0.5f);
+
+        }
+
+        if (spriteNext.getGlobalBounds().contains(mouseWorldPos))
+        {
+
+            spriteNext.setScale(0.9f, 0.9f);
+        }
+        else
+        {
+
+            spriteNext.setScale(1.0f, 1.0f);
+
+        }
+
+
+        if (event.type == sf::Event::MouseButtonPressed)
+        {
+            
+            if (event.mouseButton.button == sf::Mouse::Left) 
+            {
+                sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+                if (spriteCh1.getGlobalBounds().contains(static_cast<sf::Vector2f>(mousePosition))) 
+                {
+                    if (!firstClick)
+                    {
+                        firstClick = true;
+                        posirionPlayer1 = 1;
+
+                    }
+                    if (firstClick && !secondClick && posirionPlayer1 != 1)
+                    {
+                        secondClick = true;
+                        posirionPlayer2 = 1;
+
+                    }
+                    
+
+                }
+
+                if (spriteCh2.getGlobalBounds().contains(static_cast<sf::Vector2f>(mousePosition)))
+                {
+                    if (!firstClick)
+                    {
+                        firstClick = true;
+                        posirionPlayer1 = 2;
+
+                    }
+                    if (firstClick && !secondClick && posirionPlayer1 != 2)
+                    {
+                        secondClick = true;
+                        posirionPlayer2 = 2;
+
+                    }
+
+
+                }
+
+                if (spriteCh3.getGlobalBounds().contains(static_cast<sf::Vector2f>(mousePosition)))
+                {
+                    if (!firstClick)
+                    {
+                        firstClick = true;
+                        posirionPlayer1 = 3;
+
+                    }
+                    if (firstClick && !secondClick && posirionPlayer1 != 3)
+                    {
+                        secondClick = true;
+                        posirionPlayer2 = 3;
+
+                    }
+
+
+                }
+
+
+                if (spriteCh4.getGlobalBounds().contains(static_cast<sf::Vector2f>(mousePosition)))
+                {
+                    if (!firstClick)
+                    {
+                        firstClick = true;
+                        posirionPlayer1 = 4;
+
+                    }
+                    if (firstClick && !secondClick && posirionPlayer1 != 4)
+                    {
+                        secondClick = true;
+                        posirionPlayer2 = 4;
+
+                    }
+
+
+                }
+
+                if (spriteNext.getGlobalBounds().contains(static_cast<sf::Vector2f>(mousePosition)))
+                {
+                    if(firstClick && secondClick)
+                    {
+                        CharacterSelected = true;
+                    }
+                }
+            }
+        }
+    }
+
+    
+   
+
+   
+
+    window.clear(sf::Color::Black);
+
+
+    window.draw(spriteSelectCharacter);
+    window.draw(spriteCh1);
+    window.draw(spriteCh2);
+    window.draw(spriteCh3);
+    window.draw(spriteCh4);
+    window.draw(spriteNext);
+
+    
+    
+    
+    if (posirionPlayer1 == 1) { window.draw(textForCh1_1); Ch1_player1 = true; }
+    if (posirionPlayer1 == 2) { window.draw(textForCh1_2); Ch2_player1 = true;}
+    if (posirionPlayer1 == 3) { window.draw(textForCh1_3); Ch3_player1 = true; }
+    if (posirionPlayer1 == 4) { window.draw(textForCh1_4); Ch4_player1 = true; }
+
+    if (posirionPlayer2 == 1) { window.draw(textForCh2_1); Ch1_player2 = true; }
+    if (posirionPlayer2 == 2) { window.draw(textForCh2_2); Ch2_player2 = true;}
+    if (posirionPlayer2 == 3) { window.draw(textForCh2_3); Ch3_player2 = true;}
+    if (posirionPlayer2 == 4) { window.draw(textForCh2_4); Ch4_player2 = true;}
+
+        
+  
+   
+
+}
+
+void loading(sf::RenderWindow& window, std::vector<sf::Texture>& tenor)
+{
+    sf::Sprite sprite;
+    sprite.setPosition(0, 0);
+    float scaleFactor = 0.935f; // Коэффициент масштабирования
+
+    // Отображение всех кадров анимации
+    while (currentFrame1 < tenor.size()-1)
+    {
+        sf::Event event;
+        while (window.pollEvent(event))
+        {
+            if (event.type == sf::Event::Closed)
+                window.close();
+        }
+
+        window.clear(sf::Color::Black);
+
+        // Установка текстуры текущего кадра на спрайт
+        sprite.setTexture(tenor[currentFrame1]);
+
+        // Установка масштаба спрайта
+        sprite.setScale(sf::Vector2f(scaleFactor, scaleFactor));
+        sprite.setPosition(570, 355);
+
+        // Отображение текущего кадра анимации с установкой новой позиции
+        window.draw(sprite);
+
+        window.display();
+
+        // Переключение кадров анимации
+        ++currentFrame1;
+
+        // Задержка между кадрами
+        std::this_thread::sleep_for(std::chrono::milliseconds(2)); // Можно изменить время задержки
+    }
+
+
+    
+
+
+}
+
+
+
+void DrawCharacters(sf::RenderWindow& window)
+{
+
+
+    //первый перс
+
+    sf::Texture textureCh1;
+    if (!textureCh1.loadFromFile("Character1/Character1_static.png"))
+    {
+        throw std::runtime_error("Character image is not open");
+    }
+    sf::Sprite spriteCh1(textureCh1);
+    spriteCh1.setTexture(textureCh1);
+    spriteCh1.scale(0.9, 0.9);
+    spriteCh1.setPosition(100, 250);
+
+    //первый перс зеркалка
+
+    sf::Texture textureCh1Mir;
+    if (!textureCh1Mir.loadFromFile("Character1/Character1_mir_static.png"))
+    {
+        throw std::runtime_error("Character image is not open");
+    }
+    sf::Sprite spriteCh1Mir(textureCh1Mir);
+    spriteCh1Mir.setTexture(textureCh1Mir);
+    spriteCh1Mir.scale(0.9, 0.9);
+    spriteCh1Mir.setPosition(1200, 250);
+
+
+    sf::Event event;
+    while (window.pollEvent(event))
+    {
+        if (event.type == sf::Event::Closed)
+            window.close();
+    }
+        
+            
+            
+               
+            
+
+     
+
+
+ 
+ 
+
+
+
+    //window.clear(sf::Color::Black);
+    
+    if (Ch1_player1) { window.draw(spriteCh1); }
+    if (Ch1_player2) { window.draw(spriteCh1Mir); }
+
 
 
 }

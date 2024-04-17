@@ -46,6 +46,18 @@ int main()
 
     }
 
+    std::vector<sf::Texture> frames2;
+    frames2.push_back(sf::Texture());
+    for (int i = 0; i < 163; ++i)
+    {
+        frames2.push_back(sf::Texture());
+        frames2[i].loadFromFile("tenor/tenor-" + to_string(i) + ".png");
+
+
+    }
+
+
+
 
 
     showLoadingScreen(window, frames);
@@ -98,6 +110,13 @@ int main()
         throw std::runtime_error("Choice image is not open");
     }
 
+    sf::Texture textureSelectCharacter;
+    if (!textureSelectCharacter.loadFromFile("selectCharacter.jpeg"))
+    {
+        throw std::runtime_error("Choice image is not open");
+    }
+
+    
 
 
 
@@ -110,8 +129,17 @@ int main()
     sf::Sprite spriteMenu(textureMenu);
     sf::Sprite spritePlay(texturePlay);
     sf::Sprite spriteChoice(textureChoice);
+    sf::Sprite spriteSelectCharacter(textureSelectCharacter);
+
+
 
     bool map1 = false, map2 = false, map3 = false, map4 = false;
+    bool CharacterSelected = false; bool MouseClick = false;
+    
+
+   
+
+
 
 
     while (window.isOpen())
@@ -122,39 +150,61 @@ int main()
         {
             animationAfterPlay(window, clips);
             backgroundSelection(window, spriteChoice, textureChoice,
-                map1, map2, map3, map4);
-            if (map1)
+                map1, map2, map3, map4, MouseClick);
+            
+            if(MouseClick)
             {
+                
                 sf::sleep(sf::milliseconds(300));
-                playInMap4(window, spritePlace1, texturePlace1);
-            }
-            if (map2)
-            {
-                sf::sleep(sf::milliseconds(300));
-                playInMap4(window, spritePlace2, texturePlace2);
-            }
-            if (map3)
-            {
-                sf::sleep(sf::milliseconds(300));
-                playInMap4(window, spritePlace3, texturePlace3);
-            }
+                ChoiceCharacter(window, spriteSelectCharacter, textureSelectCharacter, CharacterSelected);
 
-            if (map4)
-            {
-                sf::sleep(sf::milliseconds(300));
-                playInMap4(window, spritePlace4, texturePlace4);
+                if (CharacterSelected)
+                {
+                    loading(window, frames2);
+                    
+                    
+                    if (map1)
+                    {
+                        loading(window, frames2);
+                        sf::sleep(sf::milliseconds(300));
+                        playInMap4(window, spritePlace1, texturePlace1);
+
+                        DrawCharacters(window);
+                    }
+                    if (map2)
+                    {
+                        loading(window, frames2);
+                        sf::sleep(sf::milliseconds(300));
+                        playInMap4(window, spritePlace2, texturePlace2);
+
+                        DrawCharacters(window);
+                    }
+                    if (map3)
+                    {
+                        loading(window, frames2);
+                        sf::sleep(sf::milliseconds(300));
+                        playInMap4(window, spritePlace3, texturePlace3);
+
+                        DrawCharacters(window);
+                    }
+
+                    if (map4)
+                    {
+                        loading(window, frames2);
+                        sf::sleep(sf::milliseconds(300));
+                        playInMap4(window, spritePlace4, texturePlace4);
+
+                        DrawCharacters(window);
+                    }
+
+                }
             }
 
             
 
         }
 
-        if (GetAsyncKeyState(VK_F11))
-        {
-            HWND hwnd = window.getSystemHandle();
-            SetForegroundWindow(hwnd);
-            SetWindowPos(hwnd, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
-        }
+        
 
         window.display();
     }
