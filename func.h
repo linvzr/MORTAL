@@ -860,7 +860,7 @@ void DrawCharacters(sf::RenderWindow& window)
 {
 
 
-    //первый перс
+    //первый перс)
 
     sf::Texture textureCh1;
     if (!textureCh1.loadFromFile("Character1/Character1_static.png"))
