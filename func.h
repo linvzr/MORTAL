@@ -194,21 +194,21 @@ void menuWithPlay(sf::RenderWindow& window, sf::Sprite& spriteMenu, sf::Texture&
         if (event.type == sf::Event::Closed)
             window.close();
 
-        // Обработка событий мыши
+       
         if (event.type == sf::Event::MouseMoved) {
-            // Получаем позицию курсора мыши относительно окна
+            
             sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
-            // Преобразуем позицию курсора в координаты окна
+            
             sf::Vector2f mouseWorldPos = window.mapPixelToCoords(mousePosition);
-            // Проверяем, наведен ли курсор на кнопку "PLAY"
+           
             if (spritePlay.getGlobalBounds().contains(mouseWorldPos))
             {
-                // Уменьшаем масштаб кнопки "PLAY"
-                spritePlay.setScale(0.9f, 0.9f); // Примерный коэффициент уменьшения
+               
+                spritePlay.setScale(0.9f, 0.9f); 
             }
             else
             {
-                // Возвращаем исходный масштаб кнопки "PLAY"
+                           
                 spritePlay.setScale(1.0f, 1.0f);
             }
 
@@ -493,7 +493,7 @@ void backgroundSelection(sf::RenderWindow& window, sf::Sprite& spriteChoice, sf:
 
 
 
-int posirionPlayer1 = 0, posirionPlayer2 = 0;
+int positionPlayer1 = 0, positionPlayer2 = 0;
 bool firstClick = false;
 bool secondClick = false;
 
@@ -504,7 +504,8 @@ bool Ch1_player2 = false, Ch2_player2 = false, Ch3_player2 = false, Ch4_player2 
 
 
 
-void ChoiceCharacter(sf::RenderWindow& window, sf::Sprite& spriteSelectCharacter, sf::Texture& textureSelectCharacter, bool& CharacterSelected)
+void ChoiceCharacter(sf::RenderWindow& window, sf::Sprite& spriteSelectCharacter, sf::Texture& textureSelectCharacter, bool& CharacterSelected,
+    bool& Ch1, bool& Ch2, bool& Ch3, bool& Ch4)
 {
     spriteSelectCharacter.setTexture(textureSelectCharacter);
 
@@ -695,16 +696,17 @@ void ChoiceCharacter(sf::RenderWindow& window, sf::Sprite& spriteSelectCharacter
                 sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
                 if (spriteCh1.getGlobalBounds().contains(static_cast<sf::Vector2f>(mousePosition))) 
                 {
+                    
                     if (!firstClick)
                     {
                         firstClick = true;
-                        posirionPlayer1 = 1;
+                        positionPlayer1 = 1;
 
                     }
-                    if (firstClick && !secondClick && posirionPlayer1 != 1)
+                    if (firstClick && !secondClick && positionPlayer1 != 1)
                     {
                         secondClick = true;
-                        posirionPlayer2 = 1;
+                        positionPlayer2 = 1;
 
                     }
                     
@@ -716,13 +718,13 @@ void ChoiceCharacter(sf::RenderWindow& window, sf::Sprite& spriteSelectCharacter
                     if (!firstClick)
                     {
                         firstClick = true;
-                        posirionPlayer1 = 2;
+                        positionPlayer1 = 2;
 
                     }
-                    if (firstClick && !secondClick && posirionPlayer1 != 2)
+                    if (firstClick && !secondClick && positionPlayer1 != 2)
                     {
                         secondClick = true;
-                        posirionPlayer2 = 2;
+                        positionPlayer2 = 2;
 
                     }
 
@@ -734,13 +736,13 @@ void ChoiceCharacter(sf::RenderWindow& window, sf::Sprite& spriteSelectCharacter
                     if (!firstClick)
                     {
                         firstClick = true;
-                        posirionPlayer1 = 3;
+                        positionPlayer1 = 3;
 
                     }
-                    if (firstClick && !secondClick && posirionPlayer1 != 3)
+                    if (firstClick && !secondClick && positionPlayer1 != 3)
                     {
                         secondClick = true;
-                        posirionPlayer2 = 3;
+                        positionPlayer2 = 3;
 
                     }
 
@@ -753,13 +755,13 @@ void ChoiceCharacter(sf::RenderWindow& window, sf::Sprite& spriteSelectCharacter
                     if (!firstClick)
                     {
                         firstClick = true;
-                        posirionPlayer1 = 4;
+                        positionPlayer1 = 4;
 
                     }
-                    if (firstClick && !secondClick && posirionPlayer1 != 4)
+                    if (firstClick && !secondClick && positionPlayer1 != 4)
                     {
                         secondClick = true;
-                        posirionPlayer2 = 4;
+                        positionPlayer2 = 4;
 
                     }
 
@@ -795,15 +797,15 @@ void ChoiceCharacter(sf::RenderWindow& window, sf::Sprite& spriteSelectCharacter
     
     
     
-    if (posirionPlayer1 == 1) { window.draw(textForCh1_1); Ch1_player1 = true; }
-    if (posirionPlayer1 == 2) { window.draw(textForCh1_2); Ch2_player1 = true;}
-    if (posirionPlayer1 == 3) { window.draw(textForCh1_3); Ch3_player1 = true; }
-    if (posirionPlayer1 == 4) { window.draw(textForCh1_4); Ch4_player1 = true; }
+    if (positionPlayer1 == 1) { window.draw(textForCh1_1); Ch1_player1 = true; Ch1 = true; }
+    if (positionPlayer1 == 2) { window.draw(textForCh1_2); Ch2_player1 = true; Ch2 = true; }
+    if (positionPlayer1 == 3) { window.draw(textForCh1_3); Ch3_player1 = true; Ch3 = true; }
+    if (positionPlayer1 == 4) { window.draw(textForCh1_4); Ch4_player1 = true; Ch4 = true; }
 
-    if (posirionPlayer2 == 1) { window.draw(textForCh2_1); Ch1_player2 = true; }
-    if (posirionPlayer2 == 2) { window.draw(textForCh2_2); Ch2_player2 = true;}
-    if (posirionPlayer2 == 3) { window.draw(textForCh2_3); Ch3_player2 = true;}
-    if (posirionPlayer2 == 4) { window.draw(textForCh2_4); Ch4_player2 = true;}
+    if (positionPlayer2 == 1) { window.draw(textForCh2_1); Ch1_player2 = true; Ch1 = true; }
+    if (positionPlayer2 == 2) { window.draw(textForCh2_2); Ch2_player2 = true; Ch2 = true; }
+    if (positionPlayer2 == 3) { window.draw(textForCh2_3); Ch3_player2 = true; Ch3 = true; }
+    if (positionPlayer2 == 4) { window.draw(textForCh2_4); Ch4_player2 = true; Ch4 = true;  }
 
         
   
@@ -815,7 +817,7 @@ void loading(sf::RenderWindow& window, std::vector<sf::Texture>& tenor)
 {
     sf::Sprite sprite;
     sprite.setPosition(0, 0);
-    float scaleFactor = 0.935f; // Коэффициент масштабирования
+    float scaleFactor = 0.935f;
 
     // Отображение всех кадров анимации
     while (currentFrame1 < tenor.size()-1)
@@ -829,23 +831,23 @@ void loading(sf::RenderWindow& window, std::vector<sf::Texture>& tenor)
 
         window.clear(sf::Color::Black);
 
-        // Установка текстуры текущего кадра на спрайт
+        
         sprite.setTexture(tenor[currentFrame1]);
 
-        // Установка масштаба спрайта
+        
         sprite.setScale(sf::Vector2f(scaleFactor, scaleFactor));
         sprite.setPosition(570, 355);
 
-        // Отображение текущего кадра анимации с установкой новой позиции
+        
         window.draw(sprite);
 
         window.display();
 
-        // Переключение кадров анимации
+        
         ++currentFrame1;
 
-        // Задержка между кадрами
-        std::this_thread::sleep_for(std::chrono::milliseconds(2)); // Можно изменить время задержки
+        
+        std::this_thread::sleep_for(std::chrono::milliseconds(2)); 
     }
 
 
@@ -854,35 +856,13 @@ void loading(sf::RenderWindow& window, std::vector<sf::Texture>& tenor)
 
 }
 
+int currentFrame = 0; 
+bool firstMirrCh1 = false;
+ 
 
-
-void DrawCharacters(sf::RenderWindow& window)
+void DrawCharacter1(sf::RenderWindow& window, std::vector<sf::Texture>& textureRightCh1, sf::Sprite& spR1, sf::Sprite& spR2,
+    sf::Texture& textureCh1, sf::Sprite& spriteCh1, sf::Sprite& spriteCh1Mir)
 {
-
-
-    //первый перс)
-
-    sf::Texture textureCh1;
-    if (!textureCh1.loadFromFile("Character1/Character1_static.png"))
-    {
-        throw std::runtime_error("Character image is not open");
-    }
-    sf::Sprite spriteCh1(textureCh1);
-    spriteCh1.setTexture(textureCh1);
-    spriteCh1.scale(0.9, 0.9);
-    spriteCh1.setPosition(100, 250);
-
-    //первый перс зеркалка
-
-    sf::Texture textureCh1Mir;
-    if (!textureCh1Mir.loadFromFile("Character1/Character1_mir_static.png"))
-    {
-        throw std::runtime_error("Character image is not open");
-    }
-    sf::Sprite spriteCh1Mir(textureCh1Mir);
-    spriteCh1Mir.setTexture(textureCh1Mir);
-    spriteCh1Mir.scale(0.9, 0.9);
-    spriteCh1Mir.setPosition(1200, 250);
 
 
     sf::Event event;
@@ -890,26 +870,474 @@ void DrawCharacters(sf::RenderWindow& window)
     {
         if (event.type == sf::Event::Closed)
             window.close();
-    }
+
         
+    }
+    if(Ch1_player1)
+    {
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+        {
             
             
-               
+
+                sf::Vector2f currentPosition = spriteCh1.getPosition();
+                if (currentFrame == 2)
+                {
+                    currentFrame = 0;
+                }
+
+                if (currentFrame == 0)
+                {
+                    spR1.move(100, 0);
+                    spR1.setScale(0.7f, 0.7f);
+                    spR1.setPosition(currentPosition.x, 195);
+                    window.draw(spR1);
+                }
+                else
+                {
+                    spR2.move(100, 0);
+                    spR2.setScale(0.6f, 0.6f);
+                    spR2.setPosition(currentPosition.x, currentPosition.y);
+                    window.draw(spR2);
+                    spriteCh1.setScale(0.9, 0.9);
+                }
+
+                ++currentFrame;
             
 
-     
+            spriteCh1.move(100, 0);
+        }
 
+        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+        {
+            sf::Vector2f currentPosition = spriteCh1.getPosition();
+            firstMirrCh1 = true;
+            if (currentFrame == 2)
+            {
+                currentFrame = 0;
+            }
 
- 
- 
+            if (currentFrame == 0)
+            {
+                spR1.move(-100, 0);
+                spR1.setScale(-0.7f, 0.7f);
+                spR1.setPosition(currentPosition.x + 250, 195);
+                window.draw(spR1);
+            }
+            else
+            {
+                spR2.move(-100, 0);
+                spR2.setScale(-0.6f, 0.6f);
+                spR2.setPosition(currentPosition.x + 250, currentPosition.y);
+                window.draw(spR2);
+                spriteCh1.setScale(-0.9, 0.9);
+                spriteCh1.setPosition(currentPosition.x + 250, currentPosition.y);
+            }
 
+            ++currentFrame;
 
+            spriteCh1.move(-100, 0);
+            
+        }
+        else
+        {
+             window.draw(spriteCh1);
+            
 
-    //window.clear(sf::Color::Black);
+        }
+
+    }
+    if (Ch1_player2)
+    {
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+        {
+            
+
+                sf::Vector2f currentPosition = spriteCh1Mir.getPosition();
+                if (currentFrame == 2)
+                {
+                    currentFrame = 0;
+                }
+
+                if (currentFrame == 0)
+                {
+                    spR1.move(100, 0);
+                    spR1.setScale(0.7f, 0.7f);
+                    spR1.setPosition(currentPosition.x, 195);
+                    window.draw(spR1);
+                }
+                else
+                {
+                    spR2.move(100, 0);
+                    spR2.setScale(0.6f, 0.6f);
+                    spR2.setPosition(currentPosition.x, currentPosition.y);
+                    window.draw(spR2);
+                    spriteCh1Mir.setScale(-0.9, 0.9);
+                    spriteCh1Mir.setPosition(currentPosition.x + 150, currentPosition.y);
+                    
+                }
+
+                ++currentFrame;
+            
+            spriteCh1Mir.move(100, 0);
+        }
+
+        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+        {
+            sf::Vector2f currentPosition = spriteCh1Mir.getPosition();
+            firstMirrCh1 = true;
+            if (currentFrame == 2)
+            {
+                currentFrame = 0;
+            }
+
+            if (currentFrame == 0)
+            {
+                spR1.move(-100, 0);
+                spR1.setScale(-0.7f, 0.7f);
+                spR1.setPosition(currentPosition.x + 250, 195);
+                window.draw(spR1);
+            }
+            else
+            {
+                spR2.move(-100, 0);
+                spR2.setScale(-0.6f, 0.6f);
+                spR2.setPosition(currentPosition.x + 250, currentPosition.y);
+                window.draw(spR2);
+                spriteCh1Mir.setScale(0.9, 0.9);
+                
+            }
+
+            ++currentFrame;
+
+            spriteCh1Mir.move(-100, 0);
+        }
+        else
+        {
+            
+             window.draw(spriteCh1Mir);
+
+        }
+
+    }
     
-    if (Ch1_player1) { window.draw(spriteCh1); }
-    if (Ch1_player2) { window.draw(spriteCh1Mir); }
 
+
+}
+
+
+
+int currentFrame2 = 0;
+
+void DrawCharacter2(sf::RenderWindow& window, sf::Sprite& spriteCh2Step, sf::Texture& textureCh2, sf::Sprite& spriteCh2, sf::Sprite& spriteCh2Mir)
+{
+
+    sf::Event event;
+    while (window.pollEvent(event))
+    {
+        if (event.type == sf::Event::Closed)
+            window.close();
+
+
+    }
+
+    if (Ch2_player1)
+    {
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+        {
+            sf::Vector2f currentPosition = spriteCh2.getPosition();
+            if (currentFrame2 == 2)
+            {
+                currentFrame2 = 0;
+            }
+
+            if (currentFrame2 == 0)
+            {
+                spriteCh2Step.move(100, 0);
+                spriteCh2Step.setScale(1.3f, 1.3f);
+                spriteCh2Step.setPosition(currentPosition.x, 300);
+                window.draw(spriteCh2Step);
+            }
+            else
+            {
+                spriteCh2.move(100, 0);
+                spriteCh2.setScale(1.3, 1.3);
+                spriteCh2.setPosition(currentPosition.x, currentPosition.y);
+                window.draw(spriteCh2);
+            }
+
+            ++currentFrame2;
+
+            spriteCh2.move(100, 0);
+
+
+
+        }
+
+        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+        {
+            sf::Vector2f currentPosition = spriteCh2.getPosition();
+            if (currentFrame2 == 2)
+            {
+                currentFrame2 = 0;
+            }
+
+            if (currentFrame2 == 0)
+            {
+                spriteCh2Step.move(-100, 0);
+                spriteCh2Step.setScale(-1.3f, 1.3f);
+                spriteCh2Step.setPosition(currentPosition.x+200, 300);
+                window.draw(spriteCh2Step);
+            }
+            else
+            {
+                spriteCh2.move(-100, 0);
+                spriteCh2.setScale(-1.3, 1.3);
+                spriteCh2.setPosition(currentPosition.x+100, currentPosition.y);
+                window.draw(spriteCh2);
+            }
+
+            ++currentFrame2;
+
+            spriteCh2.move(-100, 0);
+            
+        }
+        else
+        {
+            window.draw(spriteCh2);
+
+
+        }
+
+    }
+    if (Ch2_player2)
+    {
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+        {
+            sf::Vector2f currentPosition = spriteCh2Mir.getPosition();
+            if (currentFrame2 == 2)
+            {
+                currentFrame2 = 0;
+            }
+
+            if (currentFrame2 == 0)
+            {
+                spriteCh2Step.move(100, 0);
+                spriteCh2Step.setScale(1.3f, 1.3f);
+                spriteCh2Step.setPosition(currentPosition.x-300, 300);
+                window.draw(spriteCh2Step);
+            }
+            else
+            {
+                spriteCh2Mir.move(100, 0);
+                spriteCh2Mir.setScale(-1.3, 1.3);
+                spriteCh2Mir.setPosition(currentPosition.x+300, currentPosition.y);
+                window.draw(spriteCh2Mir);
+            }
+
+            ++currentFrame2;
+
+            spriteCh2Mir.move(100, 0);
+
+            
+        }
+
+        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+        {
+            sf::Vector2f currentPosition = spriteCh2Mir.getPosition();
+            if (currentFrame2 == 2)
+            {
+                currentFrame2 = 0;
+            }
+
+            if (currentFrame2 == 0)
+            {
+                spriteCh2Step.move(-100, 0);
+                spriteCh2Step.setScale(-1.3f, 1.3f);
+                spriteCh2Step.setPosition(currentPosition.x+200, 300);
+                window.draw(spriteCh2Step);
+            }
+            else
+            {
+                spriteCh2Mir.move(-100, 0);
+                spriteCh2Mir.setScale(1.3, 1.3);
+                spriteCh2Mir.setPosition(currentPosition.x, currentPosition.y);
+                window.draw(spriteCh2Mir);
+            }
+
+            ++currentFrame2;
+
+            spriteCh2Mir.move(-100, 0);
+
+            
+        }
+        else
+        {
+
+            window.draw(spriteCh2Mir);
+
+        }
+
+    }
+
+
+
+
+
+}
+
+int currentFrame3 = 0;
+
+void DrawCharacter3(sf::RenderWindow& window, sf::Sprite& spriteCh3StepOne, sf::Sprite& spriteCh3StepTwo, sf::Sprite& spriteCh3, sf::Sprite& spriteCh3Mir)
+{
+
+    sf::Event event;
+    while (window.pollEvent(event))
+    {
+        if (event.type == sf::Event::Closed)
+            window.close();
+
+
+    }
+
+    if (Ch3_player1)
+    {
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+        {
+            sf::Vector2f currentPosition = spriteCh3.getPosition();
+            if (currentFrame3 == 2)
+            {
+                currentFrame3 = 0;
+            }
+
+            if (currentFrame3 == 0)
+            {
+                spriteCh3StepOne.move(100, 0);
+                spriteCh3StepOne.setScale(1.5f, 1.5f);
+                spriteCh3StepOne.setPosition(currentPosition.x+200, 450);
+                window.draw(spriteCh3StepOne);
+            }
+            else
+            {
+                spriteCh3StepTwo.move(100, 0);
+                spriteCh3StepTwo.setScale(0.9, 0.9);
+                spriteCh3StepTwo.setPosition(currentPosition.x+200, currentPosition.y+100);
+                window.draw(spriteCh3StepTwo);
+            }
+
+            ++currentFrame3;
+
+            spriteCh3.move(100, 0);
+
+
+
+        }
+
+        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+        {
+            /*sf::Vector2f currentPosition = spriteCh2.getPosition();
+            if (currentFrame3 == 2)
+            {
+                currentFrame3 = 0;
+            }
+
+            if (currentFrame3 == 0)
+            {
+                spriteCh2Step.move(-100, 0);
+                spriteCh2Step.setScale(-1.3f, 1.3f);
+                spriteCh2Step.setPosition(currentPosition.x + 200, 300);
+                window.draw(spriteCh2Step);
+            }
+            else
+            {
+                spriteCh2.move(-100, 0);
+                spriteCh2.setScale(-1.3, 1.3);
+                spriteCh2.setPosition(currentPosition.x + 100, currentPosition.y);
+                window.draw(spriteCh2);
+            }
+
+            ++currentFrame3;
+
+            spriteCh2.move(-100, 0);*/
+
+        }
+        else
+        {
+            window.draw(spriteCh3);
+
+
+        }
+
+    }
+    if (Ch3_player2)
+    {
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+        {
+            /*sf::Vector2f currentPosition = spriteCh2Mir.getPosition();
+            if (currentFrame3 == 2)
+            {
+                currentFrame3 = 0;
+            }
+
+            if (currentFrame3 == 0)
+            {
+                spriteCh2Step.move(100, 0);
+                spriteCh2Step.setScale(1.3f, 1.3f);
+                spriteCh2Step.setPosition(currentPosition.x, 300);
+                window.draw(spriteCh2Step);
+            }
+            else
+            {
+                spriteCh2Mir.move(100, 0);
+                spriteCh2Mir.setScale(1.3, 1.3);
+                spriteCh2Mir.setPosition(currentPosition.x, currentPosition.y);
+                window.draw(spriteCh2Mir);
+            }
+
+            ++currentFrame3;
+
+            spriteCh2Mir.move(100, 0);*/
+
+
+        }
+
+        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+        {
+            /*sf::Vector2f currentPosition = spriteCh2Mir.getPosition();
+            if (currentFrame3 == 2)
+            {
+                currentFrame3 = 0;
+            }
+
+            if (currentFrame3 == 0)
+            {
+                spriteCh2Step.move(-100, 0);
+                spriteCh2Step.setScale(-1.3f, 1.3f);
+                spriteCh2Step.setPosition(currentPosition.x + 200, 300);
+                window.draw(spriteCh2Step);
+            }
+            else
+            {
+                spriteCh2Mir.move(-100, 0);
+                spriteCh2Mir.setScale(1.3, 1.3);
+                spriteCh2Mir.setPosition(currentPosition.x, currentPosition.y);
+                window.draw(spriteCh2Mir);
+            }
+
+            ++currentFrame3;
+
+            spriteCh2Mir.move(-100, 0);*/
+
+
+        }
+        else
+        {
+
+            window.draw(spriteCh3Mir);
+
+        }
+
+    }
 
 
 }
