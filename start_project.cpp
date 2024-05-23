@@ -183,6 +183,21 @@ int main()
     spR2.setScale(0.6f, 0.6f);
 
 
+    sf::Texture textureCh1_sit;
+    if (!textureCh1_sit.loadFromFile("Character1/sitCh1.png"))
+    {
+        throw std::runtime_error("Character image is not open");
+    }
+    sf::Sprite spriteCh1_sit(textureCh1_sit);
+
+    sf::Texture textureCh1_udar;
+    if (!textureCh1_udar.loadFromFile("Character1/udarCh1.png"))
+    {
+        throw std::runtime_error("Character image is not open");
+    }
+    sf::Sprite spriteCh1_udar(textureCh1_udar);
+
+
 
     
 
@@ -225,6 +240,25 @@ int main()
     sf::Sprite spriteCh2Step(textureCh2Step);
 
 
+    sf::Texture textureCh2_sit;
+    if (!textureCh2_sit.loadFromFile("Character2/sitCh2.png"))
+    {
+        throw std::runtime_error("Character image is not open");
+    }
+    sf::Sprite spriteCh2_sit(textureCh2_sit);
+
+
+    sf::Texture textureCh2_udar;
+    if (!textureCh2_udar.loadFromFile("Character2/udarCh2.png"))
+    {
+        throw std::runtime_error("Character image is not open");
+    }
+    sf::Sprite spriteCh2_udar(textureCh2_udar);
+
+
+
+
+
 
 
     
@@ -237,7 +271,7 @@ int main()
     }
     sf::Sprite spriteCh3(textureCh3);
 
-    //второй перс зеркалка
+    //третий перс зеркалка
 
     sf::Texture textureCh3Mir;
     if (!textureCh3Mir.loadFromFile("Character3/staticCh3_mirr.png"))
@@ -250,7 +284,7 @@ int main()
 
     spriteCh3.setTexture(textureCh3);
     spriteCh3.scale(2, 2);
-    spriteCh3.setPosition(80, 345);
+    spriteCh3.setPosition(80, 345+100);
 
 
     spriteCh3Mir.setTexture(textureCh3Mir);
@@ -273,7 +307,93 @@ int main()
     sf::Sprite spriteCh3StepTwo(textureCh3StepTwo);
 
 
+    sf::Texture textureCh3_sit;
+    if (!textureCh3_sit.loadFromFile("Character3/sitCh3.png"))
+    {
+        throw std::runtime_error("Character image is not open");
+    }
+    sf::Sprite spriteCh3_sit(textureCh3_sit);
 
+    sf::Texture textureCh3_udar;
+    if (!textureCh3_udar.loadFromFile("Character3/udarCh3.png"))
+    {
+        throw std::runtime_error("Character image is not open");
+    }
+    sf::Sprite spriteCh3_udar(textureCh3_udar);
+
+
+
+
+    //******************* перс4 ******************************//
+
+    sf::Texture textureCh4;
+    if (!textureCh4.loadFromFile("Character4/staticCh4.png"))
+    {
+        throw std::runtime_error("Character image is not open");
+    }
+    sf::Sprite spriteCh4(textureCh4);
+
+    //четвертый перс зеркалка
+
+    sf::Texture textureCh4Mir;
+    if (!textureCh4Mir.loadFromFile("Character4/staticCh4_mirr.png"))
+    {
+        throw std::runtime_error("Character image is not open");
+    }
+    sf::Sprite spriteCh4Mir(textureCh4Mir);
+
+
+    spriteCh4.setTexture(textureCh4);
+    spriteCh4.scale(1.9,1.9);
+    spriteCh4.setPosition(140, 395);
+
+
+    spriteCh4Mir.setTexture(textureCh4Mir);
+    spriteCh4Mir.scale(1.9, 1.9);
+    spriteCh4Mir.setPosition(1210, 420);
+
+
+    sf::Texture textureCh4StepOne;
+    if (!textureCh4StepOne.loadFromFile("Character4/stepOneCh4.png"))
+    {
+        throw std::runtime_error("Character image is not open");
+    }
+    sf::Sprite spriteCh4StepOne(textureCh4StepOne);
+
+    sf::Texture textureCh4StepTwo;
+    if (!textureCh4StepTwo.loadFromFile("Character4/stepTwoCh4.png"))
+    {
+        throw std::runtime_error("Character image is not open");
+    }
+    sf::Sprite spriteCh4StepTwo(textureCh4StepTwo);
+
+
+    sf::Texture textureCh4_sit;
+    if (!textureCh4_sit.loadFromFile("Character4/sitCh4.png"))
+    {
+        throw std::runtime_error("Character image is not open");
+    }
+    sf::Sprite spriteCh4_sit(textureCh4_sit);
+
+    sf::Texture textureCh4_udar;
+    if (!textureCh4_udar.loadFromFile("Character4/udarCh4.png"))
+    {
+        throw std::runtime_error("Character image is not open");
+    }
+    sf::Sprite spriteCh4_udar(textureCh4_udar);
+
+
+    //************************************************************************************************//
+
+
+    sf::Texture textureKokoro;
+    if (!textureKokoro.loadFromFile("kokoro.png"))
+    {
+        throw std::runtime_error("Character image is not open");
+    }
+    sf::Sprite spriteKokoro_one(textureKokoro);
+    sf::Sprite spriteKokoro_two(textureKokoro);
+    sf::Sprite spriteKokoro_three(textureKokoro);
 
 
 
@@ -320,16 +440,24 @@ int main()
 
                         if(Ch1)
                         {
-                            DrawCharacter1(window, textureRightCh1, spR1, spR2, textureCh1, spriteCh1, spriteCh1Mir);
+                            DrawCharacter1(window, textureRightCh1, spR1, spR2, textureCh1, 
+                                spriteCh1, spriteCh1Mir, spriteCh1_sit, spriteCh1_udar);
                         }
                         if (Ch2)
                         {
-                            DrawCharacter2(window, spriteCh2Step, textureCh2, spriteCh2, spriteCh2Mir);
+                            DrawCharacter2(window, spriteCh2Step, textureCh2, spriteCh2, 
+                                spriteCh2Mir, spriteCh2_sit, spriteCh2_udar);
 
                         }
                         if (Ch3)
                         {
-                            DrawCharacter3(window, spriteCh3StepOne, spriteCh3StepTwo, spriteCh3, spriteCh3Mir);
+                            DrawCharacter3(window, spriteCh3StepOne, spriteCh3StepTwo, spriteCh3,
+                                spriteCh3Mir, spriteCh3_sit, spriteCh3_udar);
+                        }
+                        if (Ch4)
+                        {
+                           DrawCharacter4(window, spriteCh4StepOne, spriteCh4StepTwo, spriteCh4, 
+                               spriteCh4Mir, spriteCh4_sit, spriteCh4_udar);
                         }
                     }
                     if (map2)
@@ -364,7 +492,7 @@ int main()
             
 
         }
-////
+
         
 
         window.display();
