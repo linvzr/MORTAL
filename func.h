@@ -1863,7 +1863,287 @@ void DrawCharacter4(sf::RenderWindow& window, sf::Sprite& spriteCh4StepOne, sf::
 
 
 
-void health(sf::RenderWindow& window)
+void health(sf::RenderWindow& window, sf::Sprite& spriteCh1, sf::Sprite& spriteCh2, sf::Sprite& spriteCh3, sf::Sprite& spriteCh4,
+    sf::Sprite& spriteCh1Mir, sf::Sprite& spriteCh2Mir, sf::Sprite& spriteCh3Mir, sf::Sprite& spriteCh4Mir,
+    bool& Ch1, bool& Ch2, bool& Ch3, bool& Ch4, int& h1, int& h2, sf::Text& healthOne, sf::Text& healthTwo )
 {
+    if (Ch1 && Ch2)
+    {
+        if (Ch1_player1)
+        {
+            sf::Vector2f currentPosition_1 = spriteCh1.getPosition();
+            sf::Vector2f currentPosition_2 = spriteCh2Mir.getPosition();
+
+            sf::FloatRect bounds1 = spriteCh1.getGlobalBounds();
+            sf::FloatRect bounds2 = spriteCh2Mir.getGlobalBounds();
+
+            if (bounds1.intersects(bounds2) && sf::Keyboard::isKeyPressed(sf::Keyboard::F)) h2 -= 25;
+            if (bounds1.intersects(bounds2) && sf::Keyboard::isKeyPressed(sf::Keyboard::RControl)) h1 -= 25;
+
+            
+
+        }
+        else
+        {
+            sf::Vector2f currentPosition_1 = spriteCh2.getPosition();
+            sf::Vector2f currentPosition_2 = spriteCh1Mir.getPosition();
+
+            sf::FloatRect bounds1 = spriteCh2.getGlobalBounds();
+            sf::FloatRect bounds2 = spriteCh1Mir.getGlobalBounds();
+
+            if (bounds1.intersects(bounds2) && sf::Keyboard::isKeyPressed(sf::Keyboard::F)) h2 -= 25;
+            if (bounds1.intersects(bounds2) && sf::Keyboard::isKeyPressed(sf::Keyboard::RControl)) h1 -= 25;
+
+        }
+
+
+    }
+
+    if (Ch1 && Ch3)
+    {
+        if (Ch1_player1)
+        {
+            sf::Vector2f currentPosition_1 = spriteCh1.getPosition();
+            sf::Vector2f currentPosition_2 = spriteCh3Mir.getPosition();
+
+            sf::FloatRect bounds1 = spriteCh1.getGlobalBounds();
+            sf::FloatRect bounds2 = spriteCh3Mir.getGlobalBounds();
+
+            if (bounds1.intersects(bounds2) && sf::Keyboard::isKeyPressed(sf::Keyboard::F)) h2 -= 25;
+            if (bounds1.intersects(bounds2) && sf::Keyboard::isKeyPressed(sf::Keyboard::RControl)) h1 -= 25;
+
+
+
+        }
+        else
+        {
+            sf::Vector2f currentPosition_1 = spriteCh3.getPosition();
+            sf::Vector2f currentPosition_2 = spriteCh1Mir.getPosition();
+
+            sf::FloatRect bounds1 = spriteCh3.getGlobalBounds();
+            sf::FloatRect bounds2 = spriteCh1Mir.getGlobalBounds();
+
+            if (bounds1.intersects(bounds2) && sf::Keyboard::isKeyPressed(sf::Keyboard::F)) h2 -= 25;
+            if (bounds1.intersects(bounds2) && sf::Keyboard::isKeyPressed(sf::Keyboard::RControl)) h1 -= 25;
+
+        }
+
+
+    }
+
+    if (Ch1 && Ch4)
+    {
+        if (Ch1_player1)
+        {
+            sf::Vector2f currentPosition_1 = spriteCh1.getPosition();
+            sf::Vector2f currentPosition_2 = spriteCh4Mir.getPosition();
+
+            sf::FloatRect bounds1 = spriteCh1.getGlobalBounds();
+            sf::FloatRect bounds2 = spriteCh4Mir.getGlobalBounds();
+
+            if (bounds1.intersects(bounds2) && sf::Keyboard::isKeyPressed(sf::Keyboard::F)) h2 -= 25;
+            if (bounds1.intersects(bounds2) && sf::Keyboard::isKeyPressed(sf::Keyboard::RControl)) h1 -= 25;
+
+
+
+        }
+        else
+        {
+            sf::Vector2f currentPosition_1 = spriteCh4.getPosition();
+            sf::Vector2f currentPosition_2 = spriteCh1Mir.getPosition();
+
+            sf::FloatRect bounds1 = spriteCh4.getGlobalBounds();
+            sf::FloatRect bounds2 = spriteCh1Mir.getGlobalBounds();
+
+            if (bounds1.intersects(bounds2) && sf::Keyboard::isKeyPressed(sf::Keyboard::F)) h2 -= 25;
+            if (bounds1.intersects(bounds2) && sf::Keyboard::isKeyPressed(sf::Keyboard::RControl)) h1 -= 25;
+
+        }
+
+
+    }
+
+
+    if (Ch2 && Ch3)
+    {
+        if (Ch2_player1)
+        {
+            
+
+            sf::FloatRect bounds1 = spriteCh2.getGlobalBounds();
+            sf::FloatRect bounds2 = spriteCh3Mir.getGlobalBounds();
+
+            if (bounds1.intersects(bounds2) && sf::Keyboard::isKeyPressed(sf::Keyboard::F)) h2 -= 25;
+            if (bounds1.intersects(bounds2) && sf::Keyboard::isKeyPressed(sf::Keyboard::RControl)) h1 -= 25;
+
+
+
+        }
+        else
+        {
+           
+
+            sf::FloatRect bounds1 = spriteCh3.getGlobalBounds();
+            sf::FloatRect bounds2 = spriteCh2Mir.getGlobalBounds();
+
+            if (bounds1.intersects(bounds2) && sf::Keyboard::isKeyPressed(sf::Keyboard::F)) h2 -= 25;
+            if (bounds1.intersects(bounds2) && sf::Keyboard::isKeyPressed(sf::Keyboard::RControl)) h1 -= 25;
+
+        }
+
+
+    }
+
+    if (Ch2 && Ch4)
+    {
+        if (Ch2_player1)
+        {
+
+
+            sf::FloatRect bounds1 = spriteCh2.getGlobalBounds();
+            sf::FloatRect bounds2 = spriteCh4Mir.getGlobalBounds();
+
+            if (bounds1.intersects(bounds2) && sf::Keyboard::isKeyPressed(sf::Keyboard::F)) h2 -= 25;
+            if (bounds1.intersects(bounds2) && sf::Keyboard::isKeyPressed(sf::Keyboard::RControl)) h1 -= 25;
+
+
+
+        }
+        else
+        {
+
+
+            sf::FloatRect bounds1 = spriteCh4.getGlobalBounds();
+            sf::FloatRect bounds2 = spriteCh2Mir.getGlobalBounds();
+
+            if (bounds1.intersects(bounds2) && sf::Keyboard::isKeyPressed(sf::Keyboard::F)) h2 -= 25;
+            if (bounds1.intersects(bounds2) && sf::Keyboard::isKeyPressed(sf::Keyboard::RControl)) h1 -= 25;
+
+        }
+
+
+    }
+    if (Ch3 && Ch4)
+    {
+        if (Ch2_player1)
+        {
+
+
+            sf::FloatRect bounds1 = spriteCh3.getGlobalBounds();
+            sf::FloatRect bounds2 = spriteCh4Mir.getGlobalBounds();
+
+            if (bounds1.intersects(bounds2) && sf::Keyboard::isKeyPressed(sf::Keyboard::F)) h2 -= 25;
+            if (bounds1.intersects(bounds2) && sf::Keyboard::isKeyPressed(sf::Keyboard::RControl)) h1 -= 25;
+
+
+
+        }
+        else
+        {
+
+
+            sf::FloatRect bounds1 = spriteCh4.getGlobalBounds();
+            sf::FloatRect bounds2 = spriteCh3Mir.getGlobalBounds();
+
+            if (bounds1.intersects(bounds2) && sf::Keyboard::isKeyPressed(sf::Keyboard::F)) h2 -= 25;
+            if (bounds1.intersects(bounds2) && sf::Keyboard::isKeyPressed(sf::Keyboard::RControl)) h1 -= 25;
+
+        }
+
+
+    }
+
+    std::string healthL = std::to_string(h1);
+    std::string healthR = std::to_string(h2);
+
+    healthOne.setString(healthL);
+    healthOne.setPosition(300, 100);
+    healthOne.setCharacterSize(60);
+    healthOne.setFillColor(sf::Color::Red);
+
+    healthTwo.setString(healthR);
+    healthTwo.setPosition(1400, 100);
+    healthTwo.setCharacterSize(60);
+    healthTwo.setFillColor(sf::Color::Blue);
+
+
+
+    
+    sf::RectangleShape rectangle1;
+    rectangle1.setSize(sf::Vector2f(200, 100));
+    rectangle1.setPosition(250, 95);
+    rectangle1.setFillColor(sf::Color::Black);
+    rectangle1.setFillColor(sf::Color(0, 0, 0, 178)); 
+
+
+    sf::RectangleShape rectangle2;
+    rectangle2.setSize(sf::Vector2f(200, 100));
+    rectangle2.setPosition(1350, 95);
+    rectangle2.setFillColor(sf::Color::Black);
+    rectangle2.setFillColor(sf::Color(0, 0, 0, 178));
+   
+    window.draw(rectangle1);
+    window.draw(rectangle2);
+
+
+
+
+
+    window.draw(healthOne);
+    window.draw(healthTwo);
+
+
+
+}
+
+
+
+void winner_two(sf::RenderWindow& window, sf::Text& txt)
+{
+
+    sf::RectangleShape rectangle;
+    rectangle.setSize(sf::Vector2f(700, 400));
+    rectangle.setPosition(500, 200);
+    rectangle.setFillColor(sf::Color::Black);
+    
+    
+
+    txt.setString("WINNER: player2");
+    txt.setCharacterSize(60);
+    txt.setPosition(610, 350);
+
+
+
+
+    window.draw(rectangle);
+    window.draw(txt);
+    
+
+
+
+}
+
+void winner_one(sf::RenderWindow& window, sf::Text& txt)
+{
+
+    sf::RectangleShape rectangle;
+    rectangle.setSize(sf::Vector2f(700, 400));
+    rectangle.setPosition(500, 200);
+    rectangle.setFillColor(sf::Color::Black);
+
+
+
+    txt.setString("WINNER: player1");
+    txt.setCharacterSize(60);
+    txt.setPosition(610, 350);
+
+
+
+
+    window.draw(rectangle);
+    window.draw(txt);
+
+
+
 
 }
