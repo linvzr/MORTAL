@@ -386,15 +386,32 @@ int main()
     //************************************************************************************************//
 
 
-    sf::Texture textureKokoro;
-    if (!textureKokoro.loadFromFile("kokoro.png"))
-    {
-        throw std::runtime_error("Character image is not open");
-    }
-    sf::Sprite spriteKokoro_one(textureKokoro);
-    sf::Sprite spriteKokoro_two(textureKokoro);
-    sf::Sprite spriteKokoro_three(textureKokoro);
 
+
+
+   
+    sf::Text healthOne;
+    sf::Font txtOne;
+    if (!txtOne.loadFromFile("arial.ttf")) {
+        cout << "error";
+    }
+
+    healthOne.setFont(txtOne);
+
+    sf::Text healthTwo;
+    sf::Font txtTwo;
+    if (!txtTwo.loadFromFile("arial.ttf")) {
+        cout << "error";
+    }
+
+    healthTwo.setFont(txtTwo);
+
+    sf::Text txt;
+    sf::Font font;
+    if (!font.loadFromFile("arial.ttf")) {
+        cout << "error";
+    }
+    txt.setFont(font);
 
 
 
@@ -406,7 +423,7 @@ int main()
     bool Ch1 = false, Ch2 = false, Ch3 = false, Ch4 = false;
     
 
-   
+    int h1 = 100, h2 = 100;
 
 
 
@@ -434,31 +451,45 @@ int main()
                     
                     if (map1)
                     {
+                        
                         loading(window, frames2);
                         sf::sleep(sf::milliseconds(300));
                         playInMap4(window, spritePlace1, texturePlace1);
+                        if (h1 != 0 && h2 != 0)
+                        {
+                            if (Ch1)
+                            {
+                                DrawCharacter1(window, textureRightCh1, spR1, spR2, textureCh1,
+                                    spriteCh1, spriteCh1Mir, spriteCh1_sit, spriteCh1_udar);
+                            }
+                            if (Ch2)
+                            {
+                                DrawCharacter2(window, spriteCh2Step, textureCh2, spriteCh2,
+                                    spriteCh2Mir, spriteCh2_sit, spriteCh2_udar);
 
-                        if(Ch1)
-                        {
-                            DrawCharacter1(window, textureRightCh1, spR1, spR2, textureCh1, 
-                                spriteCh1, spriteCh1Mir, spriteCh1_sit, spriteCh1_udar);
+                            }
+                            if (Ch3)
+                            {
+                                DrawCharacter3(window, spriteCh3StepOne, spriteCh3StepTwo, spriteCh3,
+                                    spriteCh3Mir, spriteCh3_sit, spriteCh3_udar);
+                            }
+                            if (Ch4)
+                            {
+                                DrawCharacter4(window, spriteCh4StepOne, spriteCh4StepTwo, spriteCh4,
+                                    spriteCh4Mir, spriteCh4_sit, spriteCh4_udar);
+                            }
+                            health(window, spriteCh1, spriteCh2, spriteCh3, spriteCh4,
+                                spriteCh1Mir, spriteCh2Mir, spriteCh3Mir, spriteCh4Mir,
+                                Ch1, Ch2, Ch3, Ch4, h1, h2, healthOne, healthTwo);
                         }
-                        if (Ch2)
+                        
+                        else
                         {
-                            DrawCharacter2(window, spriteCh2Step, textureCh2, spriteCh2, 
-                                spriteCh2Mir, spriteCh2_sit, spriteCh2_udar);
+                            if (h1 == 0) { winner_two(window, txt); }
+                            else winner_one(window, txt);
+                        }
 
-                        }
-                        if (Ch3)
-                        {
-                            DrawCharacter3(window, spriteCh3StepOne, spriteCh3StepTwo, spriteCh3,
-                                spriteCh3Mir, spriteCh3_sit, spriteCh3_udar);
-                        }
-                        if (Ch4)
-                        {
-                           DrawCharacter4(window, spriteCh4StepOne, spriteCh4StepTwo, spriteCh4, 
-                               spriteCh4Mir, spriteCh4_sit, spriteCh4_udar);
-                        }
+
                     }
                     if (map2)
                     {
@@ -466,15 +497,80 @@ int main()
                         sf::sleep(sf::milliseconds(300));
                         playInMap4(window, spritePlace2, texturePlace2);
 
-                        //DrawCharacters(window);
+                        if (h1 != 0 && h2 != 0)
+                        {
+                            if (Ch1)
+                            {
+                                DrawCharacter1(window, textureRightCh1, spR1, spR2, textureCh1,
+                                    spriteCh1, spriteCh1Mir, spriteCh1_sit, spriteCh1_udar);
+                            }
+                            if (Ch2)
+                            {
+                                DrawCharacter2(window, spriteCh2Step, textureCh2, spriteCh2,
+                                    spriteCh2Mir, spriteCh2_sit, spriteCh2_udar);
+
+                            }
+                            if (Ch3)
+                            {
+                                DrawCharacter3(window, spriteCh3StepOne, spriteCh3StepTwo, spriteCh3,
+                                    spriteCh3Mir, spriteCh3_sit, spriteCh3_udar);
+                            }
+                            if (Ch4)
+                            {
+                                DrawCharacter4(window, spriteCh4StepOne, spriteCh4StepTwo, spriteCh4,
+                                    spriteCh4Mir, spriteCh4_sit, spriteCh4_udar);
+                            }
+                            health(window, spriteCh1, spriteCh2, spriteCh3, spriteCh4,
+                                spriteCh1Mir, spriteCh2Mir, spriteCh3Mir, spriteCh4Mir,
+                                Ch1, Ch2, Ch3, Ch4, h1, h2, healthOne, healthTwo);
+                        }
+
+                        else
+                        {
+                            if (h1 == 0) { winner_two(window, txt); }
+                            else winner_one(window, txt);
+                        }
+
                     }
                     if (map3)
                     {
                         loading(window, frames2);
                         sf::sleep(sf::milliseconds(300));
                         playInMap4(window, spritePlace3, texturePlace3);
+                        if (h1 != 0 && h2 != 0)
+                        {
+                            if (Ch1)
+                            {
+                                DrawCharacter1(window, textureRightCh1, spR1, spR2, textureCh1,
+                                    spriteCh1, spriteCh1Mir, spriteCh1_sit, spriteCh1_udar);
+                            }
+                            if (Ch2)
+                            {
+                                DrawCharacter2(window, spriteCh2Step, textureCh2, spriteCh2,
+                                    spriteCh2Mir, spriteCh2_sit, spriteCh2_udar);
 
-                        //DrawCharacters(window);
+                            }
+                            if (Ch3)
+                            {
+                                DrawCharacter3(window, spriteCh3StepOne, spriteCh3StepTwo, spriteCh3,
+                                    spriteCh3Mir, spriteCh3_sit, spriteCh3_udar);
+                            }
+                            if (Ch4)
+                            {
+                                DrawCharacter4(window, spriteCh4StepOne, spriteCh4StepTwo, spriteCh4,
+                                    spriteCh4Mir, spriteCh4_sit, spriteCh4_udar);
+                            }
+                            health(window, spriteCh1, spriteCh2, spriteCh3, spriteCh4,
+                                spriteCh1Mir, spriteCh2Mir, spriteCh3Mir, spriteCh4Mir,
+                                Ch1, Ch2, Ch3, Ch4, h1, h2, healthOne, healthTwo);
+                        }
+
+                        else
+                        {
+                            if (h1 == 0) { winner_two(window, txt); }
+                            else winner_one(window, txt);
+                        }
+
                     }
 
                     if (map4)
@@ -483,7 +579,40 @@ int main()
                         sf::sleep(sf::milliseconds(300));
                         playInMap4(window, spritePlace4, texturePlace4);
 
-                        //DrawCharacters(window);
+                        if (h1 != 0 && h2 != 0)
+                        {
+                            if (Ch1)
+                            {
+                                DrawCharacter1(window, textureRightCh1, spR1, spR2, textureCh1,
+                                    spriteCh1, spriteCh1Mir, spriteCh1_sit, spriteCh1_udar);
+                            }
+                            if (Ch2)
+                            {
+                                DrawCharacter2(window, spriteCh2Step, textureCh2, spriteCh2,
+                                    spriteCh2Mir, spriteCh2_sit, spriteCh2_udar);
+
+                            }
+                            if (Ch3)
+                            {
+                                DrawCharacter3(window, spriteCh3StepOne, spriteCh3StepTwo, spriteCh3,
+                                    spriteCh3Mir, spriteCh3_sit, spriteCh3_udar);
+                            }
+                            if (Ch4)
+                            {
+                                DrawCharacter4(window, spriteCh4StepOne, spriteCh4StepTwo, spriteCh4,
+                                    spriteCh4Mir, spriteCh4_sit, spriteCh4_udar);
+                            }
+                            health(window, spriteCh1, spriteCh2, spriteCh3, spriteCh4,
+                                spriteCh1Mir, spriteCh2Mir, spriteCh3Mir, spriteCh4Mir,
+                                Ch1, Ch2, Ch3, Ch4, h1, h2, healthOne, healthTwo);
+                        }
+
+                        else
+                        {
+                            if (h1 == 0) { winner_two(window, txt); }
+                            else winner_one(window, txt);
+                        }
+
                     }
 
                 }
